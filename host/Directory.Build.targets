@@ -1,0 +1,57 @@
+<Project>
+
+  <PropertyGroup Condition="'$(SpireHostIsTool)' != 'true'">
+    <SpireSts2Ref Condition="'$(SpireSts2Ref)' == ''">Publicized</SpireSts2Ref>
+    <SpireSts2RefPath Condition="'$(SpireSts2Ref)' == 'Publicized'">$(SpirePublicizedDir)sts2.dll</SpireSts2RefPath>
+    <SpireSts2RefPath Condition="'$(SpireSts2Ref)' != 'Publicized'">$(SpireGameDir)sts2.dll</SpireSts2RefPath>
+  </PropertyGroup>
+
+  <!-- Game binaries: referenced for compilation only (Private=false). They stay in host\game and are
+       resolved at run time by Boot/GameAssemblies.cs after the SHA256 pin on sts2.dll passed. -->
+  <ItemGroup Condition="'$(SpireHostIsTool)' != 'true'">
+    <Reference Include="sts2">
+      <HintPath>$(SpireSts2RefPath)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="GodotSharp">
+      <HintPath>$(SpireGameDir)GodotSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(SpireGameDir)0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- [assembly: IgnoresAccessChecksTo("sts2")] for assemblies compiled against the publicized reference. -->
+  <ItemGroup Condition="'$(SpireHostIsTool)' != 'true' And '$(SpireSts2Ref)' == 'Publicized'">
+    <Compile Include="$(HostRoot)shared\IgnoresAccessChecksTo.cs" Link="Properties\IgnoresAccessChecksTo.cs" />
+  </ItemGroup>
+
+  <!-- Sibling assemblies: always the live projects (ruling A2: one build mode; the frozen stage-0 snapshot in
+       host\snapshot is no longer referenced by anything). -->
+  <ItemGroup Condition="'$(SpireHostIsTool)' != 'true'">
+    <ProjectReference Include="@(SpireHostRef->'$(HostRoot)SpireHost.%(Identity)\SpireHost.%(Identity).csproj')" />
+  </ItemGroup>
+
+  <Target Name="SpireHostCheckInputs" BeforeTargets="ResolveAssemblyReferences" Condition="'$(SpireHostIsTool)' != 'true'">
+    <Error Condition="'$(SpireSts2Ref)' == 'Publicized' And !Exists('$(SpireSts2RefPath)')"
+           Text="Publicized reference assembly not found: $(SpireSts2RefPath). Run host\make-publicized.ps1 (or .sh) once." />
+    <Error Condition="'$(SpireHostDeps)' != '' And '$(SpireHostDeps)' != 'Project'"
+           Text="SpireHostDeps=$(SpireHostDeps) is no longer supported: the integrated host has one build mode (live project references)." />
+  </Target>
+
+  <!-- Ruling A1, fail closed: refuse to build if any output or intermediate path of this project is not under host\out. -->
+  <Target Name="SpireHostCheckOutputRoot" BeforeTargets="PrepareForBuild;CoreCompile">
+    <PropertyGroup>
+      <_SpireOutRoot>$([System.IO.Path]::GetFullPath('$(HostRoot)out'))\</_SpireOutRoot>
+      <_SpireOutDirFull>$([System.IO.Path]::GetFullPath('$(OutDir)'))</_SpireOutDirFull>
+      <_SpireObjDirFull>$([System.IO.Path]::GetFullPath('$(IntermediateOutputPath)'))</_SpireObjDirFull>
+    </PropertyGroup>
+    <Error Condition="!$(_SpireOutDirFull.StartsWith('$(_SpireOutRoot)', System.StringComparison.OrdinalIgnoreCase))"
+           Text="OutDir '$(_SpireOutDirFull)' is not under '$(_SpireOutRoot)' (ruling A1: one output root, never a project-local bin\)." />
+    <Error Condition="!$(_SpireObjDirFull.StartsWith('$(_SpireOutRoot)', System.StringComparison.OrdinalIgnoreCase))"
+           Text="IntermediateOutputPath '$(_SpireObjDirFull)' is not under '$(_SpireOutRoot)' (ruling A1: one output root, never a project-local obj\)." />
+  </Target>
+
+</Project>

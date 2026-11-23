@@ -1,0 +1,12 @@
+# Fork server for search / ExIt teacher workers and practice games (Linux only: forks use fork(2)).
+# = linux.toml + "--search" + the runtime variables the fork primitive needs (the host exits with code 3 without them).
+command = ["dotnet", "{repo}/host/out/bin/SpireHost/release/SpireHost.dll", "--serve", "--search"]
+vocab = "{repo}/host/out/bin/SpireHost/release/vocab/vocab.json"
+catalog = "{repo}/host/out/bin/SpireHost/release/vocab/catalog.json"
+
+[env]
+SPIREHOST_GAME_DIR = "{repo}/host/game"
+LC_ALL = "C.UTF-8"
+DOTNET_EnableWriteXorExecute = "0"
+DOTNET_TieredCompilation = "0"
+DOTNET_GCgen0size = "0x400000"

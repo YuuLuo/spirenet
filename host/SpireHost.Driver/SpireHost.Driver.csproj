@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- SpireHost.Driver: HostSession (engine thread + strict pump), Decision model, policies, run lifecycle,
+       room-handler registry, MAP handler, temporary room handlers, fuzz / replay / determinism tools.
+       The contract is host\DRIVER-API.md. -->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>SpireHost.Driver</AssemblyName>
+    <RootNamespace>SpireHost.Driver</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SpireHostRef Include="Core" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="SpireHost" />
+    <InternalsVisibleTo Include="SpireHost.Driver.Combat" />
+    <InternalsVisibleTo Include="SpireHost.Driver.Rooms" />
+    <InternalsVisibleTo Include="SpireHost.Driver.Events" />
+    <InternalsVisibleTo Include="SpireHost.Fidelity" />
+    <InternalsVisibleTo Include="SpireHost.Obs" />
+    <InternalsVisibleTo Include="SpireHost.Replay" />
+  </ItemGroup>
+
+</Project>

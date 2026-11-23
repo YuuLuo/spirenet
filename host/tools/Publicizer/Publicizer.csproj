@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Build-time tool: writes a REFERENCE-ONLY copy of sts2.dll in which every type / field / method is
+       public (metadata flag bytes patched in place, nothing else changes). The copy is only ever handed to
+       the C# compiler; at run time the unmodified, SHA-pinned host\game\sts2.dll is loaded.
+       No game reference, no NuGet package: System.Reflection.Metadata ships with the runtime. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>Publicizer</AssemblyName>
+    <RootNamespace>SpireHost.Tools</RootNamespace>
+    <SpireHostIsTool>true</SpireHostIsTool>
+  </PropertyGroup>
+
+</Project>

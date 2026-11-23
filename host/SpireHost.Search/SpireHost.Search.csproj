@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Decision-time search support (notes/search/plan.md section 2, steps H1-H3; wire protocol notes/search/protocol.md):
+       the OS-fork primitive, the fair re-randomisation of a fork child (resampler) and the FORK extension of the serve
+       protocol ("serve" with "search"). Linux only at run time (fork); on Windows the code compiles and is never reached:
+       a search server is a startup error there. Nothing here is used by a server started without the search switch.
+       Build:  dotnet build ..\SpireHost\SpireHost.csproj -c Release -nodeReuse:false -p:UseSharedCompilation=false
+       Output: host\out\bin\SpireHost.Search\release\ -->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>SpireHost.Search</AssemblyName>
+    <RootNamespace>SpireHost.Search</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SpireHostRef Include="Core" />
+    <SpireHostRef Include="Driver" />
+    <SpireHostRef Include="Obs" />
+  </ItemGroup>
+
+</Project>

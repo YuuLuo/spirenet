@@ -1,0 +1,9 @@
+# SpireHost on Linux (development build; host/README.md, "Build"). "{repo}" = the repository root.
+# `dotnet` must be the .NET 9 runtime (set DOTNET_ROOT below if it is not on PATH).
+command = ["dotnet", "{repo}/host/out/bin/SpireHost/release/SpireHost.dll", "--serve"]
+vocab = "{repo}/host/out/bin/SpireHost/release/vocab/vocab.json"
+catalog = "{repo}/host/out/bin/SpireHost/release/vocab/catalog.json"
+
+[env]
+SPIREHOST_GAME_DIR = "{repo}/host/game"
+LC_ALL = "C.UTF-8"

@@ -1,0 +1,11 @@
+[project]
+name = "spire"
+version = "0.1.0"
+description = "Python learning stack for the SpireHost Slay the Spire 2 environment"
+requires-python = ">=3.11"
+dependencies = ["numpy>=2.0", "torch>=2.7"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"

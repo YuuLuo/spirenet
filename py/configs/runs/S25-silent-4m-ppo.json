@@ -1,0 +1,371 @@
+{
+ "run_name": "S25-silent-v2a",
+ "run_root": "../runs",
+ "topology": "processes",
+ "seed": 20261205,
+ "duration_s": null,
+ "max_updates": null,
+ "vocab": "host",
+ "catalog": "host",
+ "tokenizer": {
+  "pool_children": true,
+  "token_buckets": [
+   20,
+   28,
+   40,
+   64,
+   80,
+   96,
+   128,
+   160,
+   192,
+   224,
+   256,
+   320,
+   384
+  ],
+  "action_align": 8,
+  "child_align": 64,
+  "public_history": false,
+  "cycle_ban": true,
+  "mend_target": true,
+  "coop_features": true,
+  "commit_select": true,
+  "forecast": true,
+  "calc": true,
+  "removal_rule": true,
+  "removal_ratings": "configs/removal-ratings.json",
+  "map_tokens": "no_combat",
+  "route_summary": true,
+  "second_boss_table": true,
+  "rules_mode": "free"
+ },
+ "model": {
+  "preset": "4m",
+  "override": null,
+  "seat_symmetry": true
+ },
+ "ppo": {
+  "epochs": 1,
+  "minibatch": 4096,
+  "micro_batch": 4096,
+  "micro_tokens": null,
+  "clip": 0.2,
+  "adv_norm": true,
+  "ent_coef": 0.01,
+  "ent_coef_by_kind": [
+   [
+    8,
+    0.03
+   ],
+   [
+    5,
+    0.03
+   ],
+   [
+    7,
+    0.03
+   ]
+  ],
+  "ent_coef_seat_scaled": true,
+  "exploration_by_kind": [
+   [
+    8,
+    0.03
+   ],
+   [
+    5,
+    0.02
+   ],
+   [
+    7,
+    0.02
+   ],
+   [
+    1,
+    0.01
+   ]
+  ],
+  "exploration_choice_uniform": true,
+  "uniform_kl_by_kind": [
+   [
+    8,
+    0.003
+   ],
+   [
+    5,
+    0.003
+   ],
+   [
+    7,
+    0.003
+   ],
+   [
+    1,
+    0.001
+   ]
+  ],
+  "ent_normalize": false,
+  "vf_coef": 0.5,
+  "value_clip": null,
+  "normalize_returns": false,
+  "aux_win": 0.1,
+  "aux_floors": 0.1,
+  "aux_hp": 0.1,
+  "floors_scale": 50.0,
+  "lr": 7.5e-05,
+  "lr_schedule": "constant",
+  "warmup_updates": 0,
+  "total_updates": 0,
+  "min_lr_frac": 0.1,
+  "weight_decay": 0.0,
+  "betas": [
+   0.9,
+   0.999
+  ],
+  "adam_eps": 1e-05,
+  "grad_clip": 1.0,
+  "target_kl": 0.03,
+  "kl_lr_target": 0.01,
+  "ema_decay": 0.998,
+  "bf16": true,
+  "recompute_values": false,
+  "decoupled_clip_anchor": false,
+  "advice": [],
+  "taste": {
+   "file": "",
+   "p_episode": 0.0,
+   "eps": 0.0,
+   "seed": 0,
+   "p_thin": 0.5,
+   "thin_deck": 24,
+   "start_floor": 0
+  },
+  "kickstart": {
+   "teacher": "",
+   "pi_coef": 1.0,
+   "v_coef": 0.5,
+   "updates": 4000,
+   "phase": 1,
+   "fade_updates": null,
+   "smooth": []
+  },
+  "rules": {
+   "coef_removal": 0.05,
+   "fade_updates": 1000,
+   "floor_removal": 0.1
+  },
+  "combat_temperature": 1.0,
+  "gae": {
+   "gamma": 1.0,
+   "lam": 0.99,
+   "macro_micro": true,
+   "lam_macro": 0.99,
+   "lam_micro": 0.99,
+   "stitch_segments": true
+  },
+  "seed": 0
+ },
+ "rewards": {
+  "floor": 0.01,
+  "elite": 0.02,
+  "boss": 0.1,
+  "win": 1.0,
+  "death": -0.1,
+  "hp_coef": 0.1,
+  "gamma": 0.9998,
+  "kills": "counters",
+  "caps_as_failure": true
+ },
+ "rollout": {
+  "segment_len": 256,
+  "max_pending_steps": 1024,
+  "keep_bootstrap_sample": true
+ },
+ "episodes": {
+  "lineups": [
+   [
+    "SILENT",
+    1.0
+   ]
+  ],
+  "ascensions": [
+   [
+    0,
+    1.0
+   ]
+  ],
+  "seeds": "rng",
+  "lineup_ascensions": [
+   [
+    "SILENT",
+    [
+     [
+      0,
+      0.35
+     ],
+     [
+      1,
+      0.15
+     ],
+     [
+      2,
+      0.15
+     ],
+     [
+      3,
+      0.1
+     ],
+     [
+      4,
+      0.1
+     ],
+     [
+      5,
+      0.05
+     ],
+     [
+      6,
+      0.04
+     ],
+     [
+      8,
+      0.03
+     ],
+     [
+      10,
+      0.03
+     ]
+    ]
+   ]
+  ]
+ },
+ "actor": {
+  "actors": 25,
+  "device": "cuda",
+  "devices": [
+   "cuda:2",
+   "cuda:3"
+  ],
+  "use_graphs": true,
+  "temperature": 1.0,
+  "max_batch": 64,
+  "max_wait_ms": 0.3,
+  "min_group": 64,
+  "max_inflight": 2,
+  "report_interval": 5.0,
+  "weight_poll_interval": 0.5,
+  "reset_flags": 795,
+  "max_episode_decisions": 30000,
+  "pile_cap": 600,
+  "priority": "above_normal",
+  "cpus": "",
+  "gpu_priority": "",
+  "switch_interval_ms": 0.0,
+  "compile": true
+ },
+ "hosts": {
+  "command": [],
+  "real": true,
+  "real_config": "configs/hosts/linux.toml",
+  "extra_args": [],
+  "fake": {
+   "win_prob": 0.5,
+   "mean_decisions": 300.0,
+   "length_sigma": 0.6,
+   "min_decisions": 3,
+   "max_decisions": 4000,
+   "auto_step_prob": 0.15,
+   "max_auto_steps": 3,
+   "abort_prob": 0.01,
+   "error_prob": 0.0,
+   "size": "typical",
+   "hashes": false,
+   "learnable": false,
+   "end_turn_penalty": 8,
+   "frame_pool": 0,
+   "decision_cap": 0,
+   "turn_cap_prob": 0.0
+  },
+  "fake_latency_ms": 0.0,
+  "envs_per_actor": 60,
+  "start_timeout": 180.0,
+  "reset_timeout": 60.0,
+  "step_timeout": 60.0,
+  "max_restarts": 5,
+  "restart_window": 600.0,
+  "transport": "stdio",
+  "priority": "",
+  "cpus": ""
+ },
+ "learner": {
+  "device": "cuda:0",
+  "allow_ppo_config_change": true,
+  "iteration_samples": 77824,
+  "ring_capacity_samples": 1048576,
+  "max_staleness": 32,
+  "checkpoint_interval_s": 600.0,
+  "milestone_every_updates": 500,
+  "micro_tokens": 65536,
+  "priority": "above_normal",
+  "cpus": "",
+  "gpu_priority": "",
+  "blocking_sync": true,
+  "fast": true,
+  "cuda_graphs": true,
+  "compile": true,
+  "bag_atomic": false,
+  "backpressure": "throttle",
+  "backlog_high_iterations": 1.25,
+  "backlog_low_iterations": 1.0,
+  "heartbeat_s": 900.0,
+  "pipeline_prepare": true,
+  "replica_device": "cuda:1",
+  "acting_weights": "ema",
+  "confident_keep": 0.2
+ },
+ "shm_mb": 256,
+ "metrics_interval_s": 30.0,
+ "gpu_interval_s": 15.0,
+ "outcome_window": 2000,
+ "heartbeat_timeout_s": 900.0,
+ "max_actor_restarts": 20,
+ "eval": {
+  "enabled": true,
+  "panel": "solo-S25-silent-v2a-a0a5a10",
+  "panel_seeds": 50,
+  "lineups": [
+   "SILENT"
+  ],
+  "ascensions": [
+   0,
+   5,
+   10
+  ],
+  "interval_s": 3600.0,
+  "first_after_s": 1200.0,
+  "envs": 8,
+  "max_fraction": 0.1,
+  "weights": "ema",
+  "temperature": 0.0,
+  "device": "cuda:0",
+  "max_episode_decisions": 30000,
+  "round_budget_s": 1800.0,
+  "priority": "normal",
+  "results_dir": ""
+ },
+ "sampling_file": "sampling.json",
+ "sampling_poll_s": 30.0,
+ "dashboard_interval_s": 300.0,
+ "run_start": 18,
+ "resume_from": "",
+ "migrate_public_history": false,
+ "migrate_seat_symmetry": false,
+ "migrate_coop_features": false,
+ "migrate_forecast": false,
+ "migrate_calc": false,
+ "migrate_inputs2": false,
+ "migrate_rules": false,
+ "rules_free": false,
+ "reset_seat_symmetry_optimizer": false
+}

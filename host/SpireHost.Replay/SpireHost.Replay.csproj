@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Real-client oracle tools: .mcr combat replays re-executed in the host (per-action checksum comparison) and run-trace room-boundary comparison.
+       A LIBRARY of the integrated host (H1 integration, rulings A2 / A3): it references the live SpireHost.Core /
+       SpireHost.Driver projects, has no console entry of its own and is shipped inside the one executable
+       (host\SpireHost). Its commands are reached as "SpireHost replay <args>" (see host\README.md).
+       Build:  dotnet build ..\SpireHost\SpireHost.csproj -c Release -nodeReuse:false -p:UseSharedCompilation=false
+       Output: host\out\bin\SpireHost.Replay\release\  (never a project-local bin\ or obj\).
+       Contract: host\DRIVER-API.md. -->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>SpireHost.Replay</AssemblyName>
+    <RootNamespace>SpireHost.Replay</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SpireHostRef Include="Core" />
+    <SpireHostRef Include="Driver" />
+  </ItemGroup>
+
+</Project>

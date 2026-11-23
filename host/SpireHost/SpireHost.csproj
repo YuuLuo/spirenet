@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- SpireHost (exe): THE executable of the integrated host (H1 integration, ruling A3). It references every
+       module project and defines the production configuration in exactly one place (ProductionHost.cs): the
+       production module set (Fidelity + Combat + Rooms + Events + Obs) and with it the production patch set.
+       Every command - serve, fuzz, determinism, replay, the oracle tools, every team's self-tests - runs on
+       that one configuration.
+       Build:   dotnet build SpireHost\SpireHost.csproj -c Release -nodeReuse:false -p:UseSharedCompilation=false
+       Output:  host\out\bin\SpireHost\release\SpireHost.exe (+ vocab\vocab.json, vocab\catalog.json)
+       Deploy:  host\make-dist.ps1 / make-dist.sh -> host\dist\<stamp>-<label>\ (training and verification run from there). -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>SpireHost</AssemblyName>
+    <RootNamespace>SpireHost</RootNamespace>
+    <SpireSts2Ref>Plain</SpireSts2Ref>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SpireHostRef Include="Core" />
+    <SpireHostRef Include="Driver" />
+    <SpireHostRef Include="Fidelity" />
+    <SpireHostRef Include="Driver.Combat" />
+    <SpireHostRef Include="Driver.Rooms" />
+    <SpireHostRef Include="Driver.Events" />
+    <SpireHostRef Include="Obs" />
+    <SpireHostRef Include="Replay" />
+    <SpireHostRef Include="Search" />
+  </ItemGroup>
+
+  <!-- The released vocabulary travels with the executable: <exe dir>\vocab\vocab.json + catalog.json. -->
+  <ItemGroup>
+    <None Include="..\vocab\vocab.json" Link="vocab\vocab.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\vocab\catalog.json" Link="vocab\catalog.json" CopyToOutputDirectory="PreserveNewest" Condition="Exists('..\vocab\catalog.json')" />
+  </ItemGroup>
+
+</Project>

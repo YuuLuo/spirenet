@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Observation encoder + binary protocol: Decision -> obs-schema-v1 frame bytes, vocab / catalog export, the protocol server.
+       A LIBRARY of the integrated host (H1 integration, rulings A2 / A3): it references the live SpireHost.Core /
+       SpireHost.Driver projects (and NO other team project: ruling D6), has no console entry of its own and is
+       shipped inside the one executable (host\SpireHost). Its commands are reached as "SpireHost obs <args>"
+       ("SpireHost serve" and "SpireHost export-vocab", with two leading dashes, are top-level commands).
+       The vocabulary the integrated host ships is host\vocab\vocab.json + catalog.json (copied next to the
+       executable by the SpireHost project); data\*.json in this directory is the frozen pre-integration release
+       (vocab_version 2), kept only as the merge base and for the pre-integration obs console.
+       Build:  dotnet build ..\SpireHost\SpireHost.csproj -c Release -nodeReuse:false -p:UseSharedCompilation=false
+       Output: host\out\bin\SpireHost.Obs\release\  (never a project-local bin\ or obj\).
+       Contract: host\DRIVER-API.md. -->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>SpireHost.Obs</AssemblyName>
+    <RootNamespace>SpireHost.Obs</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SpireHostRef Include="Core" />
+    <SpireHostRef Include="Driver" />
+  </ItemGroup>
+
+</Project>

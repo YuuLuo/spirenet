@@ -1,0 +1,32 @@
+# game files and everything generated from them (never commit)
+host/game/
+host/publicized/
+host/vocab/catalog.json
+host/out/
+host/dist/
+vocab-export/
+
+# weights, runs, results
+/checkpoints/
+*.pt
+/runs/
+eval/results/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.mypy_cache/
+py/native/build/
+py/spire/_native*.pyd
+py/spire/_native*.so
+py/spire/_pipemux*.pyd
+
+# editors / build
+.vs/
+.vscode/
+.idea/
+bin/
+obj/
+*.stackdump

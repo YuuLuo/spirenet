@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- SpireHost.Core: boot, engine pump / virtual clock, plumbing + scheduling + fidelity-gate patches,
+       PatchRegistry, veteran profile, state signatures, the H0 combat test harness.
+       Compiled against the REAL sts2.dll (SpireSts2Ref=Plain): this is the H0-validated code, and binding it
+       against the publicized reference could silently pick different overloads. -->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>SpireHost.Core</AssemblyName>
+    <RootNamespace>SpireHost</RootNamespace>
+    <SpireSts2Ref>Plain</SpireSts2Ref>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="SpireHost" />
+    <InternalsVisibleTo Include="SpireHost.Driver" />
+    <InternalsVisibleTo Include="SpireHost.Driver.Combat" />
+    <InternalsVisibleTo Include="SpireHost.Driver.Rooms" />
+    <InternalsVisibleTo Include="SpireHost.Driver.Events" />
+    <InternalsVisibleTo Include="SpireHost.Fidelity" />
+    <InternalsVisibleTo Include="SpireHost.Obs" />
+    <InternalsVisibleTo Include="SpireHost.Replay" />
+    <InternalsVisibleTo Include="SpireHost.Bench" />
+  </ItemGroup>
+
+</Project>

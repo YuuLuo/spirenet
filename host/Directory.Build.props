@@ -1,0 +1,63 @@
+<Project>
+
+  <!-- Shared by every project under host\ (see README.md "Build" and DRIVER-API.md section 2).
+
+       ONE build mode (H1 integration, ruling A2): every project references the live sibling projects.
+       ONE output root (ruling A1): host\out\ for ALL projects, through the SDK artifacts layout:
+
+           host\out\bin\<Project>\release\      binaries   (the executable: host\out\bin\SpireHost\release\SpireHost.exe)
+           host\out\obj\<Project>\release\      intermediates
+
+       Nothing is ever written into a project-local bin\ or obj\ directory. The pre-integration per-project
+       bin\ / obj\ directories are left alone (other workflows may still run binaries from them); because the
+       intermediate path moved, their stale *.cs files (AssemblyInfo, global usings) would be picked up by the
+       default Compile glob, so both directories are excluded explicitly below.
+
+       Properties a project (or the command line: -p:Name=Value) may set:
+
+         SpireSts2Ref    Publicized (default) - compile against host\publicized\sts2.dll (every member public;
+                                  reference only) + [assembly: IgnoresAccessChecksTo("sts2")]
+                         Plain    - compile against the real host\game\sts2.dll (public API only)
+
+       Which sibling assemblies a project wants is declared with items:
+           <ItemGroup><SpireHostRef Include="Core" /><SpireHostRef Include="Driver" /></ItemGroup>
+       Directory.Build.targets turns them into ProjectReference items. -->
+
+  <PropertyGroup>
+    <HostRoot>$(MSBuildThisFileDirectory)</HostRoot>
+    <SpireGameDir>$(HostRoot)game\</SpireGameDir>
+    <SpirePublicizedDir>$(HostRoot)publicized\</SpirePublicizedDir>
+
+    <!-- Ruling A1: the one output root. Must be set here (before the SDK computes its bin / obj paths). -->
+    <ArtifactsPath>$(HostRoot)out</ArtifactsPath>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+
+    <!-- Known trap of moving the intermediate path: the old project-local directories are no longer excluded
+         from the default globs (the SDK only excludes $(BaseOutputPath) and $(BaseIntermediateOutputPath)). -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);bin\**;obj\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);CS8632;CS0618;CS0436;MSB3277;MSB3243</NoWarn>
+    <!-- Deterministic, path-independent builds so that a dist is reproducible. -->
+    <Deterministic>true</Deterministic>
+    <DebugType>portable</DebugType>
+
+    <!-- Runtime knobs for executables (measured in notes/host-spike.md section 5). Overridable per process
+         with DOTNET_gcServer / DOTNET_gcConcurrent / DOTNET_TieredPGO / DOTNET_TieredCompilation. -->
+    <ServerGarbageCollector>false</ServerGarbageCollector>
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <TieredPGO>true</TieredPGO>
+    <TieredCompilation>true</TieredCompilation>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,162 @@
+{
+ "game_version": "v0.113.1",
+ "sts2_sha256": "62ecbe91093e1fa862de4329aac865209dcb297804caf0f0520d92d8c0b4a9c3",
+ "models": [
+  {
+   "file": "silent-19m-ema.pt",
+   "bytes": 72936264,
+   "sha256": "69f340a96fdd69cb1b537f80cb00fcb5730ca19c29d90ed2ebb54fa0e5901f22",
+   "character": "SILENT",
+   "run": "S35-silent-19m-exit",
+   "config": "py/configs/runs/S35-silent-19m-exit.json",
+   "version": 58071,
+   "samples_seen": 4526397563,
+   "parameters": 18220714,
+   "model_config": {
+    "d_model": 384,
+    "n_layers": 8,
+    "n_heads": 8,
+    "d_ff": 1536,
+    "d_id": 96,
+    "d_cond": 64,
+    "d_static": 128,
+    "init_std": 0.02,
+    "id_dropout": 0.0,
+    "seat_symmetry": true
+   },
+   "vocab_hash": "0xB824481A",
+   "catalog_hash": "0x6D9889A2",
+   "evaluation": {
+    "panel": "eval/panels/SILENT-a10-dev1000.json",
+    "ascension": 10,
+    "mode": "greedy, EMA weights, no search",
+    "games": 1000,
+    "wins": 854,
+    "win_rate": 0.854,
+    "wilson95": [
+     0.8308,
+     0.8745
+    ],
+    "mean_floor": 47.432,
+    "failures": {}
+   }
+  },
+  {
+   "file": "defect-4m-ema.pt",
+   "bytes": 16749135,
+   "sha256": "b2932625ca363b08b3490ad75204be1a5cc177503aeb4570da82ea63ff6e2665",
+   "character": "DEFECT",
+   "run": "S39-defect-p12",
+   "config": "py/configs/runs/S39-defect-4m.json",
+   "version": 231079,
+   "samples_seen": 16396251866,
+   "parameters": 4177354,
+   "model_config": {
+    "d_model": 224,
+    "n_layers": 4,
+    "n_heads": 7,
+    "d_ff": 896,
+    "d_id": 64,
+    "d_cond": 64,
+    "d_static": 128,
+    "init_std": 0.02,
+    "id_dropout": 0.0,
+    "seat_symmetry": true
+   },
+   "vocab_hash": "0xB824481A",
+   "catalog_hash": "0x6D9889A2",
+   "evaluation": {
+    "panel": "eval/panels/DEFECT-a10-dev1000.json",
+    "ascension": 10,
+    "mode": "greedy, EMA weights, no search",
+    "games": 1000,
+    "wins": 780,
+    "win_rate": 0.78,
+    "wilson95": [
+     0.7533,
+     0.8046
+    ],
+    "mean_floor": 46.723,
+    "failures": {}
+   }
+  },
+  {
+   "file": "ironclad-4m-ema.pt",
+   "bytes": 16749425,
+   "sha256": "f652eacc14079fd54ddf5cd87c6db50f4d8c3f682fec120c2fc5b5f3e42143cb",
+   "character": "IRONCLAD",
+   "run": "S36-ironclad-p12",
+   "config": "py/configs/runs/S36-ironclad-4m.json",
+   "version": 216143,
+   "samples_seen": 15231996665,
+   "parameters": 4177354,
+   "model_config": {
+    "d_model": 224,
+    "n_layers": 4,
+    "n_heads": 7,
+    "d_ff": 896,
+    "d_id": 64,
+    "d_cond": 64,
+    "d_static": 128,
+    "init_std": 0.02,
+    "id_dropout": 0.0,
+    "seat_symmetry": true
+   },
+   "vocab_hash": "0xB824481A",
+   "catalog_hash": "0x6D9889A2",
+   "evaluation": {
+    "panel": "eval/panels/IRONCLAD-a10-dev1000.json",
+    "ascension": 10,
+    "mode": "greedy, EMA weights, no search",
+    "games": 1000,
+    "wins": 741,
+    "win_rate": 0.741,
+    "wilson95": [
+     0.713,
+     0.7672
+    ],
+    "mean_floor": 46.5,
+    "failures": {}
+   }
+  },
+  {
+   "file": "fool-19m-ema.pt",
+   "bytes": 72935958,
+   "sha256": "b4dd9f26bb615c93d81969573250fa5f4043efea0d497267e2369b1ed974bf21",
+   "character": "FOOL",
+   "run": "S38-fool-19m-exit",
+   "config": "py/configs/runs/S38-fool-19m-exit.json",
+   "version": 40096,
+   "samples_seen": 3125231574,
+   "parameters": 18220714,
+   "model_config": {
+    "d_model": 384,
+    "n_layers": 8,
+    "n_heads": 8,
+    "d_ff": 1536,
+    "d_id": 96,
+    "d_cond": 64,
+    "d_static": 128,
+    "init_std": 0.02,
+    "id_dropout": 0.0,
+    "seat_symmetry": true
+   },
+   "vocab_hash": "0xB824481A",
+   "catalog_hash": "0x6D9889A2",
+   "evaluation": {
+    "panel": "eval/panels/FOOL-a10-dev1000.json",
+    "ascension": 10,
+    "mode": "greedy, EMA weights, no search",
+    "games": 1000,
+    "wins": 715,
+    "win_rate": 0.715,
+    "wilson95": [
+     0.6862,
+     0.7421
+    ],
+    "mean_floor": 45.657,
+    "failures": {}
+   }
+  }
+ ]
+}

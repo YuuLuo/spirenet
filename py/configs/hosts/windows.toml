@@ -1,0 +1,11 @@
+# How the Python stack launches SpireHost (spire.host.real_host_spec): the default when no --host-config is
+# given; override with the environment variable SPIRE_REAL_HOST_CONFIG=<path>. "{repo}" = the repository root.
+# This is the Windows development build (host/README.md, "Build"); configs/hosts/ has the Linux variants.
+# The wrapper appends "--pipe <name>" for the named-pipe transport. Every frame's VOCAB_HASH / CATALOG_HASH is
+# checked against the files below when the caller passes expected_hashes (train / eval paths do).
+command = ["{repo}/host/out/bin/SpireHost/release/SpireHost.exe", "--serve"]
+vocab = "{repo}/host/out/bin/SpireHost/release/vocab/vocab.json"
+catalog = "{repo}/host/out/bin/SpireHost/release/vocab/catalog.json"
+
+[env]
+SPIREHOST_GAME_DIR = "{repo}/host/game"

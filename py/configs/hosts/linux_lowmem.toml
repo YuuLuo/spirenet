@@ -1,0 +1,17 @@
+# = linux.toml plus .NET runtime settings that cut the steady-state memory of one host process from about
+# 168 to 127 MiB at +0.25 % CPU per decision (frames are byte-identical). Used by the large training runs:
+#   DOTNET_TC_QuickJit=0        compile non-R2R game methods once at tier 1
+#   DOTNET_GCConserveMemory=9   aggressive heap compaction / decommit
+#   DOTNET_EnableDiagnostics=0  no diagnostic IPC threads / sockets
+#   DOTNET_PROCESSOR_COUNT=2    small thread pool on many-core machines
+command = ["dotnet", "{repo}/host/out/bin/SpireHost/release/SpireHost.dll", "--serve"]
+vocab = "{repo}/host/out/bin/SpireHost/release/vocab/vocab.json"
+catalog = "{repo}/host/out/bin/SpireHost/release/vocab/catalog.json"
+
+[env]
+SPIREHOST_GAME_DIR = "{repo}/host/game"
+LC_ALL = "C.UTF-8"
+DOTNET_TC_QuickJit = "0"
+DOTNET_GCConserveMemory = "9"
+DOTNET_EnableDiagnostics = "0"
+DOTNET_PROCESSOR_COUNT = "2"

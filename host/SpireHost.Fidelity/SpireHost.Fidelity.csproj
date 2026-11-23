@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Fidelity patch pack: every outcome / rng / bookkeeping TestMode gate and UI-node dependency, fail-closed, registered and listed in FIDELITY.md; per-run invariants.
+       A LIBRARY of the integrated host (H1 integration, rulings A2 / A3): it references the live SpireHost.Core /
+       SpireHost.Driver projects, has no console entry of its own and is shipped inside the one executable
+       (host\SpireHost). Its commands are reached as "SpireHost fidelity <args>" (see host\README.md).
+       Build:  dotnet build ..\SpireHost\SpireHost.csproj -c Release -nodeReuse:false -p:UseSharedCompilation=false
+       Output: host\out\bin\SpireHost.Fidelity\release\  (never a project-local bin\ or obj\).
+       Contract: host\DRIVER-API.md. -->
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <AssemblyName>SpireHost.Fidelity</AssemblyName>
+    <RootNamespace>SpireHost.Fidelity</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SpireHostRef Include="Core" />
+    <SpireHostRef Include="Driver" />
+  </ItemGroup>
+
+</Project>
