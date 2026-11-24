@@ -18,18 +18,21 @@ release.
 Raw network, greedy, no search at play time. Ascension 10, 1,000 fixed seeds per character
 (`eval/panels/<CHARACTER>-a10-dev1000.json`), one game per seed.
 
-| Character | Model | Parameters | Training samples | Wins / 1,000 | Win rate (95 % CI) |
+| Character | Model | Parameters | Training samples | Wins | Win rate (95 % CI) |
 |---|---|---:|---:|---:|---|
-| Silent | `silent-19m` | 18.2 M | 4.53 B | 854 | **85.4 %** (83.1–87.5) |
-| Defect | `defect-4m` | 4.2 M | 16.40 B | 780 | **78.0 %** (75.3–80.5) |
-| Ironclad | `ironclad-4m` | 4.2 M | 15.23 B | 741 | **74.1 %** (71.3–76.7) |
-| Fool | `fool-19m` | 18.2 M | 3.13 B | 715 | **71.5 %** (68.6–74.2) |
+| Silent | `silent-19m` | 18.2 M | 4.53 B | 854 / 1,000 | **85.4 %** (83.1–87.5) |
+| Defect | `defect-4m` | 4.2 M | 17.95 B | 1,600 / 2,000¹ | **80.0 %** (78.2–81.7) |
+| Ironclad | `ironclad-4m` | 4.2 M | 15.23 B | 741 / 1,000 | **74.1 %** (71.3–76.7) |
+| Fool | `fool-19m` | 18.2 M | 3.13 B | 715 / 1,000 | **71.5 %** (68.6–74.2) |
+
+¹ Two runs of the same 1,000 seeds (788 and 812 wins).
 
 - The win rates were measured on Windows with the code and host in this repository (`spire.habit_eval`,
   see [Evaluate](#evaluate)).
-- The 95 % interval is the Wilson interval. A 1,000-game reading has a standard error of about 1.3 points.
-  Greedy play is not bit-for-bit repeatable on a GPU (near-ties in bf16), so a rerun of the same weights on
-  the same seeds moves by about one point.
+- The 95 % interval is the Wilson interval. A 1,000-game reading has a binomial standard error of about 1.3
+  points. Greedy play is also not bit-for-bit repeatable on a GPU (near-ties in bf16, batch composition): in
+  two runs of the same Defect weights on the same seeds, 100 of 1,000 games changed outcome and the totals
+  differed by 2.4 points. Compare models on paired seeds and over more than one run.
 - These seed panels were used to monitor training. No game from them was ever used as training data.
 - Training samples are decisions the learner consumed for this network (the 19M networks count from their
   distillation start; the 4M networks from scratch).

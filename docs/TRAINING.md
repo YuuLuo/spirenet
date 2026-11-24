@@ -76,7 +76,7 @@ seats), then specialised per character with the ascension curriculum.
 |---|---|---|
 | `silent-19m` (v58071) | SILENT | 4M curriculum line → `S25` 4M PPO at A10 (14.5 B samples; 810 / 1,000 = 81.0 % on a separate sealed panel) → `S34` kickstart into 19M → `S35` PPO + ExIt (4.53 B samples on the 19M network) |
 | `fool-19m` (v40096) | FOOL | `S31` 4M (15.3 B samples) → `S37` kickstart into 19M → `S38` PPO + ExIt with a 4-GPU learner (3.13 B samples on the 19M network) |
-| `defect-4m` (v231079) | DEFECT | 4M curriculum line → `S39` PPO at A10 (16.4 B samples in total) |
+| `defect-4m` (v250992) | DEFECT | 4M curriculum line → `S39` PPO at A10 (17.9 B samples in total) |
 | `ironclad-4m` (v216143) | IRONCLAD | 4M curriculum line → `S36` PPO + ExIt at A10 (15.2 B samples in total) |
 
 ## Final settings

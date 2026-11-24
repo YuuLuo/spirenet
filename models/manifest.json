@@ -30,26 +30,32 @@
     "panel": "eval/panels/SILENT-a10-dev1000.json",
     "ascension": 10,
     "mode": "greedy, EMA weights, no search",
+    "runs": [
+     {
+      "games": 1000,
+      "wins": 854,
+      "mean_floor": 47.432,
+      "failures": {}
+     }
+    ],
     "games": 1000,
     "wins": 854,
     "win_rate": 0.854,
     "wilson95": [
      0.8308,
      0.8745
-    ],
-    "mean_floor": 47.432,
-    "failures": {}
+    ]
    }
   },
   {
    "file": "defect-4m-ema.pt",
    "bytes": 16749135,
-   "sha256": "b2932625ca363b08b3490ad75204be1a5cc177503aeb4570da82ea63ff6e2665",
+   "sha256": "d973508e94b7a837f17bcde6d1888f0623872da9adb0a0941542e1a4bfb4e0f5",
    "character": "DEFECT",
    "run": "S39-defect-p12",
    "config": "py/configs/runs/S39-defect-4m.json",
-   "version": 231079,
-   "samples_seen": 16396251866,
+   "version": 250992,
+   "samples_seen": 17948370009,
    "parameters": 4177354,
    "model_config": {
     "d_model": 224,
@@ -69,15 +75,29 @@
     "panel": "eval/panels/DEFECT-a10-dev1000.json",
     "ascension": 10,
     "mode": "greedy, EMA weights, no search",
-    "games": 1000,
-    "wins": 780,
-    "win_rate": 0.78,
-    "wilson95": [
-     0.7533,
-     0.8046
+    "runs": [
+     {
+      "games": 1000,
+      "wins": 788,
+      "mean_floor": 47.32,
+      "failures": {}
+     },
+     {
+      "games": 1000,
+      "wins": 812,
+      "mean_floor": 47.449,
+      "failures": {
+       "aborted": 1
+      }
+     }
     ],
-    "mean_floor": 46.723,
-    "failures": {}
+    "games": 2000,
+    "wins": 1600,
+    "win_rate": 0.8,
+    "wilson95": [
+     0.7819,
+     0.8169
+    ]
    }
   },
   {
@@ -108,15 +128,21 @@
     "panel": "eval/panels/IRONCLAD-a10-dev1000.json",
     "ascension": 10,
     "mode": "greedy, EMA weights, no search",
+    "runs": [
+     {
+      "games": 1000,
+      "wins": 741,
+      "mean_floor": 46.5,
+      "failures": {}
+     }
+    ],
     "games": 1000,
     "wins": 741,
     "win_rate": 0.741,
     "wilson95": [
      0.713,
      0.7672
-    ],
-    "mean_floor": 46.5,
-    "failures": {}
+    ]
    }
   },
   {
@@ -147,15 +173,21 @@
     "panel": "eval/panels/FOOL-a10-dev1000.json",
     "ascension": 10,
     "mode": "greedy, EMA weights, no search",
+    "runs": [
+     {
+      "games": 1000,
+      "wins": 715,
+      "mean_floor": 45.657,
+      "failures": {}
+     }
+    ],
     "games": 1000,
     "wins": 715,
     "win_rate": 0.715,
     "wilson95": [
      0.6862,
      0.7421
-    ],
-    "mean_floor": 45.657,
-    "failures": {}
+    ]
    }
   }
  ]
